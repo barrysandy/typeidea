@@ -2,30 +2,39 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 
-from .models import Tag, Post
+from .models import Tag, Post, Category
+from config.models import SideBar
 
 
 def post_list(request, category_id=None, tag_id=None):
-    # content = 'post_line category_id={category_id}, tag_id={tag_id}'.format(
-    #     category_id=category_id,
-    #     tag_id=tag_id,
-    # )
-    #
-    # return HttpResponse(content)
+    tag = None
+    category = None
 
     if tag_id:
-        try:
-            tag = Tag.objects.get(id=tag_id)
-        except Tag.DoseNotExist:
-            post_list = []
-        else:
-            post_list = tag.post_set.filter(status=Post.STATUS_NORMAL)
+        data_post_list, tag = Post.get_by_tag(tag_id)
+    elif category_id:
+        data_post_list, category = Post.get_by_category(category_id)
     else:
-        post_list = Post.objects.filter(category_id=category_id)
+        data_post_list = Post.latest_posts()
 
-    return render(request, 'blog/list.html', context={'post_list': post_list})
+    context = {
+        'category': category,
+        'tag': tag,
+        'post_list': data_post_list,
+        'sidebars': SideBar.get_all(),
+    }
+    context.update(Category.get_navs())
+    return render(request, 'blog/list.html', context=context)
 
 
 def post_detail(request, post_id):
-    # return HttpResponse('detail')
-    return render(request, 'blog/detail.html', context={'name': 'post_detail'})
+    try:
+        post = Post.objects.get(id=post_id)
+    except :
+        post = None
+    context = {
+        'post': post,
+        'sidebars': SideBar.get_all(),
+    }
+    context.update(Category.get_navs())
+    return render(request, 'blog/detail.html', context=context)

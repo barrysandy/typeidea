@@ -5,7 +5,45 @@
     <title>Blog-List</title>
 </head>
 <body>
-    <h1>list</h1>
-    {{ post_list }}
+    <div>顶部分类：
+        {% for cate in navs %}
+            <a href="/category/{{ cate.id }}">{{ cate.name }}</a>
+        {% endfor %}
+    </div>
+
+    <div>侧边栏展示：
+        {% for sidebar in sidebars %}
+            <h4>{{ sidebar.title }}</h4>
+            {{ sidebar.content }}
+        {% endfor %}
+    </div>
+
+    {% if tag %}
+        标签页: {{ tag.name }}
+    {% endif %}
+
+    {% if category %}
+        分类页: {{ category.name }}
+    {% endif %}
+
+    <ul>
+        {% for post in post_list %}
+            <li>
+                <a href="/post/{{ post.id }}.html">{{ post.title }}</a>
+                <div>
+                    <span>作者：{{ post.owner.username }}</span>
+                    <span>分类：{{ post.category.name }}</span>
+                </div>
+                <P>{{ post.desc }}</P>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <div>底部分类：
+        {% for cate in categories %}
+            <a href="/category/{{ cate.id }}">{{ cate.name }}</a>
+        {% endfor %}
+    </div>
+
 </body>
 </html>

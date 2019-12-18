@@ -9,13 +9,13 @@ from config.views import links
 from config.custom_site import custom_site
 
 urlpatterns = [
-    url(r'^$', post_list),
-    url(r'^category/(?P<category_id>\d+)/$', post_list),
-    url(r'^tag/(?P<tag_id>\d+)/$', post_list),
-    url(r'^post/(?P<post_id>\d+).html$', post_detail),
-    url(r'^links/$', links),
+    url(r'^$', post_list, name='index'),
+    url(r'^category/(?P<category_id>\d+)/$', post_list, name='category-list'),
+    url(r'^tag/(?P<tag_id>\d+)/$', post_list, name='tag-list'),
+    url(r'^post/(?P<post_id>\d+).html$', post_detail, name='post-detail'),
+    url(r'^links/$', links, name='links'),
 
-    url(r'^$', IndexView.as_view(), name='index'),
-    path('admin/', admin.site.urls),
-    path('admin_blog/', custom_site.urls),
+    # url(r'^$', IndexView.as_view(), name='index'),
+    path('super_admin/', admin.site.urls, name='super-admin'),
+    path('admin/', custom_site.urls, name='admin'),
 ]

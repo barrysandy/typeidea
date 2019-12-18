@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>typeidea 博客系统</title>
-</head>
+
 <body>
     <div>顶部分类：
         {% for cate in navs %}

@@ -1,5 +1,7 @@
+# from django.conf import settings
 from django.contrib import admin
-from django.conf.urls import url
+from django.conf.urls import url, include
+# from django.conf.urls.static import static
 
 from blog.views import (
     IndexView, CategoryView, TagView,
@@ -24,5 +26,8 @@ urlpatterns = [
     url(r'^super_admin/', admin.site.urls, name='super-admin'),
     url(r'^admin/', custom_site.urls, name='admin'),
 
-    url(r'^demo/', demo, name='demo')
-]
+    url(r'^demo/', demo, name='demo'),
+
+    # url(r'^ckeditor/', include('ckeditor_uploader.urls'))
+
+] # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

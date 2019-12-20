@@ -41,7 +41,25 @@ INSTALLED_APPS = [
     'config',
     'comment',
     'typeideas',
+    'ckeditor',
+    # 'ckeditor_uploader',
 ]
+
+CKEDITOR_CONFIGS = {
+    # 配置名是default时，django-ckeditor默认使用这个配置
+    'default': {
+        'toolbar': 'full',
+        'height': '300',
+        'width': '800',
+        'tabSpaces': 4,
+        'extraPlugins': 'codesnippet',
+    },
+}
+
+# MEDIA_URL = "/media/"
+# MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+# CKEDITOR_UPLOAD_PATH = "article_images"
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -9,7 +9,7 @@
         </div>
         <hr/>
         <p>
-            {{ post.content }}
+            {{ post.content|safe }}
         </p>
     {% endif %}
 {% endblock %}

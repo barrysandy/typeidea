@@ -11,11 +11,11 @@ class CommonViewMixin:
         context = super().get_context_data(**kwargs)
         context.update({
             'sidebars': SideBar.get_all(),
+            'category': Category.get_navs(),
         })
-        context.update(Category.get_navs())
         return context
 
-class IndexView(ListView):
+class IndexView(CommonViewMixin, ListView):
     model = Post
     queryset = Post.latest_posts()
     paginate_by = 10
@@ -49,7 +49,7 @@ class CategoryView(IndexView):
         category_id = self.kwargs.get('category_id')
         category = get_object_or_404(Category, pk=category_id)
         context.update({
-            'category': category,
+            'cate': category,
         })
         return context
 
@@ -57,7 +57,7 @@ class CategoryView(IndexView):
         """重写queryset, 根据分类过滤器"""
         queryset = super().get_queryset()
         category_id = self.kwargs.get('category_id')
-        return queryset.filter(catefory_id=category_id)
+        return queryset.filter(category_id=category_id)
 
 class TagView(IndexView):
     def get_context_data(self, *, object_list=None, **kwargs):

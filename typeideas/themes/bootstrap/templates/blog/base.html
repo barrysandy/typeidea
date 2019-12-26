@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Typeidea blog - by the5fire</title>
+    <title>Typeidea blog - by 凌青子</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.css">
@@ -15,18 +15,18 @@
 <body>
 	<div class="container head">
         <nav class="navbar  fixed-top navbar-expand-lg navbar-light bg-light">
-          <a class="navbar-brand" href="#">首页</a>
+          <a class="navbar-brand" href="/">首页</a>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                {% for cate in navs %}
+                {% for cate in category.categories %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'category-list' cate.id %}}">{{ cate.name }}</a>
+                        <a class="nav-link" href="{% url 'category-list' cate.id %}">{{ cate.name }}</a>
                     </li>
                 {% endfor %}
-
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <form class="form-inline my-2 my-lg-0" action="/search/" method="GET">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search"
+                     aria-label="Search" value="{{ keyword }}">
               <button class="btn btn-outline-success" type="submit">搜索</button>
             </form>
           </div>
@@ -36,26 +36,24 @@
             <p class="lead">基于Django的多人博客系统</p>
         </div>
 	</div>
-
-    <div class="container main">
+	<div class="container main">
         <div class="row">
             <div class="col-xl-9 post-list">
-                 {% block main %}
+                {% block main %}
                 {% endblock %}
+
             </div>
             <div class="col-xl-3">
                 <div class="card sidebar">
                     <div class="card-body">
                     <h4 class="card-title">关于博主</h4>
                     <p>
-                    网名：凌青子， 多年Java工程师、初级Python工程师
+                    网名：凌青子， 多年Java工程师和初级Python工程师
                     </p>
                 </div>
             </div>
         </div>
     </div>
-
-
 
     <footer class="footer">
         <div class="container">
@@ -67,7 +65,7 @@
             </nav>
         </div>
         <div class="container power">
-            <span class="text-muted">Power by Typeidea@linqingzi</span>
+            <span class="text-muted">Power by Typeidea@the5fire</span>
         </div>
     </footer>
 </html>

@@ -25,7 +25,7 @@ SECRET_KEY = '=as(i$%9@gbk_(8$yqn#h4u*^3x4cfiv9cvqdmk5(ss_zprs-o'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['47.104.209.113', 'localhost', '0.0.0.0:8002', '127.0.0.1']
 
 
 # Application definition
@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'comment',
     'typeideas',
     'ckeditor',
-    # 'ckeditor_uploader',
+    'ckeditor_uploader',
 ]
 
 CKEDITOR_CONFIGS = {
@@ -56,9 +56,9 @@ CKEDITOR_CONFIGS = {
     },
 }
 
-# MEDIA_URL = "/media/"
-# MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-# CKEDITOR_UPLOAD_PATH = "article_images"
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+CKEDITOR_UPLOAD_PATH = "article_images"
 
 
 MIDDLEWARE = [
